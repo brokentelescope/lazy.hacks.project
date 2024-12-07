@@ -6,7 +6,7 @@ app = Flask(__name__,
 
 @app.route("/")
 def index():
-    return send_from_directory("static", 'index.html')
+    return send_from_directory("templates", 'index.html')
 
 # Route to receive the buttonColors list
 @app.route('/submit-colors', methods=['POST'])
