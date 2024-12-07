@@ -3,38 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple HTML Page</title>
-    <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="../static/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Simple HTML Page</h1>
-    </header>
-    <main>
-        <input type="file" id="csvFileInput" accept=".csv" />
-        <p>This is a simple HTML page created as an example. Feel free to modify it!</p>
-        <p>Here's a link to <a href="https://www.google.com" target="_blank">Google</a>.</p>
-    </main>
-    <footer>
-        &copy; 2024 My Simple HTML Page
-    </footer>
-    <script src="../static/script.js"></script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>CSV Data Visualization</h1>
+    <h1>Upload a CSV File to Visualize Revenue Data</h1>
+
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="csv_file" accept=".csv">
+        <button type="submit">Upload and Visualize</button>
+    </form>
+
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if graph_html %}
     <div>
-        <!-- Embed the Plotly graph -->
         {{ graph_html|safe }}
     </div>
+    {% endif %}
 </body>
 </html>
