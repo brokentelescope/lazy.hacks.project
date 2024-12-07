@@ -27,8 +27,11 @@
             </div>
             <div class="right-content">
                 <form action="/" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="csv_file" accept=".csv">
-                    <button type="submit">Upload and Visualize</button>
+                      <!-- Custom File Button -->
+                      <label for="file-upload" class="custom-file-button">Choose File</label>
+                      <input type="file" id="file-upload" name="csv_file" accept=".csv" />
+                      
+                      <button type="submit">Upload and Visualize</button>
                 </form>
 
                 {% if error_message %}
