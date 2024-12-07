@@ -3,42 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple HTML Page</title>
-    <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="../static/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Simple HTML Page</h1>
-    </header>
-    <script src="../static/script.js"></script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Visualization</title>
+    <title>DataSloth</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Upload a CSV File to Visualize Revenue Data</h1>
+    <header>
+        <h1>DataSloth</h1>
+        <p>Your laziness - our data</p>
+    </header>
 
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <input type="file" name="csv_file" accept=".csv">
-        <button type="submit">Upload and Visualize</button>
-    </form>
+    <main>
+        <h2>Help Leo find a correlation in his dataset homework</h2>
+        
+        <!-- Reference the image using url_for -->
+        <img class="sloth-image" src="{{ url_for('static', filename='images/sad-sloth.png') }}" alt="Sad Sloth">
 
-    {% if error_message %}
-    <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="csv_file" accept=".csv">
+            <button type="submit">Upload and Visualize</button>
+        </form>
 
-    {% if graph_html %}
-    <div>
-        {{ graph_html|safe }}
-    </div>
-    {% endif %}
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        {% if graph_html %}
+        <div class="graph-container">
+            {{ graph_html|safe }}
+        </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 DataSloth. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>

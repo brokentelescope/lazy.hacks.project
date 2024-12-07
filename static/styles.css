@@ -1,57 +1,105 @@
-/* styles.css */
+/* Global Styles */
 html, body {
     height: 100%;
     margin: 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f9f9fc;
-    color: #333;
-}
-
-/* Flexbox layout to ensure footer stays at the bottom */
-body {
+    background-color: #f9f9f9;  /* Light off-white */
+    color: #4a4a4a;  /* Dark gray for text */
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-/* Main content takes up all available space */
-main {
-    flex-grow: 1;
-    padding: 3rem 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Header Styles */
+/* Header Styling */
 header {
-    background: linear-gradient(135deg, #007BFF, #00A1FF);
+    background-color: #6c4f3d;  /* Rich brown */
     color: white;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-    margin: 0;
     font-size: 2.5rem;
-    letter-spacing: 1px;
+    margin: 0;
+    font-weight: 400;
 }
 
-/* Link Styles */
-a {
-    color: #007BFF;
-    text-decoration: none;
-    transition: color 0.3s ease;
+header p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
 }
 
-a:hover {
-    text-decoration: underline;
-    color: #0056b3;
+/* Main Content Styling */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
 }
 
-/* Button Styles */
+h2 {
+    font-size: 1.8rem;
+    color: #6c4f3d;  /* Brown color for headings */
+    margin-bottom: 1.5rem;
+}
+
+/* Sloth Container for Image and Text */
+.sloth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;  /* Adds space between the image and text */
+    margin-bottom: 2rem; /* Adds space below the container */
+}
+
+.sloth-text {
+    font-size: 1.2rem;
+    color: #4a4a4a;  /* Dark gray text for readability */
+    max-width: 350px;  /* Restricts the text width to avoid overflowing */
+    text-align: left;
+}
+
+.sloth-image {
+    display: block;
+    max-width: 30%;  /* Ensures the image doesn't take up too much space */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sloth-image:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    width: 80%;
+    max-width: 400px;
+}
+
+input[type="file"]:focus {
+    border-color: #6c4f3d;  /* Brown focus border */
+    outline: none;
+}
+
 button {
-    background-color: #007BFF;
+    background-color: #6c4f3d;  /* Brown button */
     border: none;
     padding: 0.75rem 1.5rem;
     color: white;
@@ -62,24 +110,23 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #5a3e2e;  /* Darker brown on hover */
 }
 
-/* Form Styles */
-form {
-    margin-top: 2rem;
+/* Error Message Styling */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
 }
 
-input[type="file"] {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 1rem;
-}
-
-input[type="file"]:focus {
-    border-color: #007BFF;
-    outline: none;
+/* Footer Styling */
+footer {
+    background-color: #4a4a4a;  /* Dark gray footer */
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
 }
 
 /* Responsive Design */
@@ -89,6 +136,19 @@ input[type="file"]:focus {
     }
 
     main {
-        padding: 2rem 3%;
+        padding: 1.5rem;
+    }
+
+    .sloth-container {
+        flex-direction: column;
+    }
+
+    .sloth-image {
+        max-width: 100%;
+    }
+
+    .sloth-text {
+        text-align: center;
+        margin-top: 1rem;
     }
 }
