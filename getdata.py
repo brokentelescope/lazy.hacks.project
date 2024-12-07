@@ -10,23 +10,22 @@ api.authenticate()
 DOWNLOAD_FOLDER = "datasets"
 
 # Function to download only CSV files from a dataset
-def download_csv_files(dataset_ref):
-    try:
-        file = api.dataset_list_files(dataset_ref)
-        for x in file:
-            if x.endswith(".csv"):
-                api.dataset_download_file(dataset_ref, x, path="datasets")
-        print('done')
-        # Look for CSV files in the downloaded dataset
-    except Exception as e:
-        print(f"Failed to download {dataset_ref}: {e}")
+def download_csv_files(dataset):
+    file = api.dataset_list_files(dataset.ref)
+    print(file)
+    for x in file.files:
+        if x.endswith(".csv"):
+            api.dataset_download_file(dataset.ref, x, path="datasets")
+    print('done')
+#except Exception as e:
+ #   print(f"Failed to download {dataset.ref}: {e}")
 
 # Function to fetch random datasets and filter for CSV files
-def download_random_csv_datasets(num_datasets=1000):
+def download_random_csv_datasets():
     datasets = api.dataset_list(search="dataset")
-    
-    for x in range(num_datasets):
-        download_csv_files(datasets[x].ref)
+    print(datasets)
+    n = len(datasets)
+    for x in range(1):
+        download_csv_files(datasets[x])
 
-# Call the function to download 1000 random CSV files from datasets
-download_random_csv_datasets(1000)
+download_random_csv_datasets()
