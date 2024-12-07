@@ -8,30 +8,40 @@
 </head>
 <body>
     <header>
-        <h1>DataSloth</h1>
-        <p>Your laziness - our data</p>
+        <div class="header-content">
+            <h1>DataSloth</h1>
+            <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="DataSloth Logo">
+        </div>
+        <p class="slogan">Your laziness - our data</p>
     </header>
+      
+    
 
     <main>
-        <h2>Help Leo find a correlation in his dataset homework</h2>
-        
-        <!-- Reference the image using url_for -->
-        <img class="sloth-image" src="{{ url_for('static', filename='images/sad-sloth.png') }}" alt="Sad Sloth">
+        <div class="content-container">
+            <div class="left-content">
+                <h2>Help Leo find a correlation in his dataset homework</h2>
+                <div class="sloth-wrapper">
+                    <img class="sloth-image" src="{{ url_for('static', filename='images/sad-sloth.png') }}" alt="Sad Sloth">
+                </div>
+            </div>
+            <div class="right-content">
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="csv_file" accept=".csv">
+                    <button type="submit">Upload and Visualize</button>
+                </form>
 
-        <form action="/" method="POST" enctype="multipart/form-data">
-            <input type="file" name="csv_file" accept=".csv">
-            <button type="submit">Upload and Visualize</button>
-        </form>
+                {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+                {% endif %}
 
-        {% if error_message %}
-        <p class="error-message">{{ error_message }}</p>
-        {% endif %}
-
-        {% if graph_html %}
-        <div class="graph-container">
-            {{ graph_html|safe }}
+                {% if graph_html %}
+                <div class="graph-container">
+                    {{ graph_html|safe }}
+                </div>
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
     </main>
 
     <footer>
