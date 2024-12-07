@@ -40,18 +40,23 @@ def standardize(graph1, graph2):
 def calculate_correlation(file1, file2):
     standard1, standard2 = standardize(file1, file2)
     standard1, standard2 = np.array(standard1), np.array(standard2)
-    x1, y1 = standard1[:, 0], standard1[:, 1]
-    x2, y2 = standard2[:, 0], standard2[:, 1]
+    # Resample to 200 evenly spaced points in the x-range
+    x_common = np.linspace(min(standard1[:, 0].min(), standard2[:, 0].min()),
+                            max(standard1[:, 0].max(), standard2[:, 0].max()), 200)
 
-    # Step 1: Interpolation to match the number of points in standard1
-    # Interpolating standard2's y-values to standard1's x-values
-    interp_func = interp1d(x2, y2, kind='linear', fill_value="extrapolate")
-    y2_interp = interp_func(x1)
-    distance = euclidean(y1, y2_interp)
-    distance_dtw = dtaidistance.dtw.distance(y1, y2_interp)
+    # Interpolate y-values to the common x-axis
+    interp1 = interp1d(standard1[:, 0], standard1[:, 1], kind='linear', fill_value="extrapolate")
+    interp2 = interp1d(standard2[:, 0], standard2[:, 1], kind='linear', fill_value="extrapolate")
+
+    y1_resampled = interp1(x_common)
+    y2_resampled = interp2(x_common)
+    distance = euclidean(y1_resampled, y2_resampled)
+    distance_dtw = dtaidistance.dtw.distance(y1_resampled, y2_resampled)
     return distance + distance_dtw
 
 if __name__ == "__main__":
+
+    #test files
     file1 = 'first_dataset.csv'
     file2 = 'second_dataset.csv'
 
