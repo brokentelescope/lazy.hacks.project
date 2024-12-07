@@ -1,17 +1,23 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, render_template
+import pandas as pd
+import plotly.express as px
+import os
 
 app = Flask(__name__,
             static_url_path='', 
             static_folder='static')
-
+CSV_FILE_PATH = os.path.join(os.path.dirname(__file__), "dataset.csv")
 @app.route("/")
 def index():
-    return send_from_directory("templates", 'index.html')
+    # Read the CSV file
+    df = pd.read_csv(CSV_FILE_PATH)
 
-# Route to receive the buttonColors list
-@app.route('/submit-colors', methods=['POST'])
-def poop():
-    print('poop')
+    # Create a Plotly visualization
+    fig = px.bar(df, x='Date', y='Revenue', title="Sample Bar Chart")
+    graph_html = fig.to_html(full_html=False)
 
-if __name__ == '__main__':
+    # Pass the visualization to the template
+    return render_template("index.html", graph_html=graph_html)
+
+if __name__ == "__main__":
     app.run(debug=True)
