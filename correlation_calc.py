@@ -11,35 +11,35 @@ import dtaidistance
 def standardize(graph1, graph2):
     data1 = list(csv.reader(open(graph1)))
     new1 = [[], []]
-    for x in data1:
-        new1[0].append(x[0])
-        new1[1].append(x[1])
-    increment = float(100/len(new1[0]))
+    for x in range(1, len(data1)):
+        new1[0].append(data1[x][0])
+        new1[1].append(int(data1[x][1]))
+    increment = float(100/(len(new1[0])-1))
     m = max(new1[1])
     standard1 = []
-    for x in range(len(new1[0])):
+    for x in range(1, len(new1[0])):
         a = increment * x
-        b = new1[x] / m * 100
+        b = new1[1][x] / m * 100
         standard1.append([a, b])
     
 
     data2 = list(csv.reader(open(graph2)))
     new2 = [[], []]
-    for x in data2:
-        new2[0].append(x[0])
-        new2[1].append(x[1])
-    increment = float(100/len(new2[0]))
+    for x in range(1, len(data2)):
+        new2[0].append(data2[x][0])
+        new2[1].append(int(data2[x][1]))
+    increment = float(100/(len(new2[0])-1))
     m = max(new2[1])
     standard2 = []
-    for x in range(len(new2[0])):
+    for x in range(1, len(new2[0])):
         a = increment * x
-        b = new2[x] / m * 100
+        b = new2[1][x] / m * 100
         standard2.append([a, b])
-        
     return [standard1, standard2]
 
 def calculate_correlation(file1, file2):
     standard1, standard2 = standardize(file1, file2)
+    standard1, standard2 = np.array(standard1), np.array(standard2)
     x1, y1 = standard1[:, 0], standard1[:, 1]
     x2, y2 = standard2[:, 0], standard2[:, 1]
 
@@ -56,8 +56,5 @@ if __name__ == "__main__":
     file2 = 'second_dataset.csv'
 
     correlation_result = calculate_correlation(file1, file2)
-
-    if isinstance(correlation_result, pd.Series):
-        print("Correlation between the datasets:\n", correlation_result)
-    else:
-        print("Error:", correlation_result)
+    #less is better 
+    print(correlation_result)
